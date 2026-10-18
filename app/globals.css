@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tally colours: deep green on warm off-white, coral only for money owed. */
+@layer base {
+  :root {
+    --background: 43 28% 95%;
+    --foreground: 160 20% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 160 20% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 20% 12%;
+    --primary: 161 82% 24%;
+    --primary-foreground: 43 28% 97%;
+    --secondary: 43 20% 90%;
+    --secondary-foreground: 160 20% 12%;
+    --muted: 43 18% 90%;
+    --muted-foreground: 160 8% 38%;
+    --accent: 161 30% 90%;
+    --accent-foreground: 161 82% 18%;
+    --destructive: 15 71% 41%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 43 14% 84%;
+    --input: 43 14% 78%;
+    --ring: 161 82% 24%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
