@@ -32,7 +32,7 @@ export default function Page() {
         </div>
         <p className="mt-5 text-center text-sm text-muted-foreground">
           Only you can see your records.{" "}
-          <Link href="/privacy" className="font-medium text-brand underline underline-offset-4">
+          <Link href="/privacy" className="inline-flex min-h-11 items-center font-medium text-brand underline underline-offset-4">
             Privacy
           </Link>
         </p>

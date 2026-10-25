@@ -12,3 +12,8 @@ export const SITE_DESCRIPTION =
 
 // Who to contact about personal data. Set NEXT_PUBLIC_CONTACT_EMAIL in Vercel.
 export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";
+
+// Sign-in options that need setup in Google Cloud or an SMS provider first.
+// Set to "true" in Vercel once the provider is switched on in Supabase, so traders never see a broken button.
+export const AUTH_GOOGLE = process.env.NEXT_PUBLIC_AUTH_GOOGLE === "true";
+export const AUTH_PHONE = process.env.NEXT_PUBLIC_AUTH_PHONE === "true";
