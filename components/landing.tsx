@@ -209,9 +209,14 @@ export function Landing() {
       <footer className="border-t">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-5 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-sm text-muted-foreground">
           <p>Tally is being built by Group 7 on the Hiram Initiative&apos;s Beginner to Builder programme.</p>
-          <Link href="/auth/login" className="inline-flex min-h-11 items-center font-medium text-brand">
-            Sign in
-          </Link>
+          <div className="flex gap-5">
+            <Link href="/privacy" className="inline-flex min-h-11 items-center font-medium text-brand">
+              Privacy
+            </Link>
+            <Link href="/auth/login" className="inline-flex min-h-11 items-center font-medium text-brand">
+              Sign in
+            </Link>
+          </div>
         </div>
       </footer>
     </div>

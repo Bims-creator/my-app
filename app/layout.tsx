@@ -1,15 +1,25 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "Tally",
-  description: "Say what you sold. See who owes you.",
+  metadataBase: new URL(SITE_URL),
+  title: { default: SITE_TITLE, template: "%s · Tally" },
+  description: SITE_DESCRIPTION,
+  applicationName: "Tally",
+  appleWebApp: { capable: true, title: "Tally", statusBarStyle: "default" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Tally",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    locale: "en_GB",
+  },
+  twitter: { card: "summary_large_image", title: SITE_TITLE, description: SITE_DESCRIPTION },
 };
 
 export const viewport: Viewport = {
@@ -48,6 +58,9 @@ export default function RootLayout({
           <p className="p-4 text-center">Tally needs JavaScript turned on to work.</p>
         </noscript>
         {children}
+        {/* Cookie-free page and speed stats. Turned on in the Vercel dashboard. */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

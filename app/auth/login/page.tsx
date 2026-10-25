@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LoginForm } from "@/components/login-form";
 
 // The first screen a new trader sees: what Tally does, shown working, then the one action.
@@ -29,7 +30,12 @@ export default function Page() {
         <div className="mt-8">
           <LoginForm />
         </div>
-        <p className="mt-5 text-center text-sm text-muted-foreground">Only you can see your records.</p>
+        <p className="mt-5 text-center text-sm text-muted-foreground">
+          Only you can see your records.{" "}
+          <Link href="/privacy" className="font-medium text-brand underline underline-offset-4">
+            Privacy
+          </Link>
+        </p>
       </div>
     </main>
   );
