@@ -10,7 +10,16 @@ export default function OpengraphImage() {
     (
       <div style={{ width: "100%", height: "100%", display: "flex", background: "#f6f4ef", padding: 64, gap: 56 }}>
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1.15 }}>
-          <div style={{ fontSize: 56, fontWeight: 700, color: "#0b6e4f", letterSpacing: -1 }}>Tally</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+            <svg width="64" height="64" viewBox="0 0 100 100">
+              <rect width="100" height="100" rx="24" fill="#0b6e4f" />
+              {[28, 41, 54, 67].map((x) => (
+                <rect key={x} x={x} y={24} width={7} height={52} rx={3.5} fill="#f6f4ef" />
+              ))}
+              <rect x={18} y={46.5} width={64} height={7} rx={3.5} fill="#f6f4ef" transform="rotate(-28 50 50)" />
+            </svg>
+            <div style={{ fontSize: 56, fontWeight: 700, color: "#0b6e4f", letterSpacing: -1 }}>Tally</div>
+          </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 76, fontWeight: 700, color: "#17241f", lineHeight: 1.04, letterSpacing: -2 }}>
               Say what you sold. See who owes you.
