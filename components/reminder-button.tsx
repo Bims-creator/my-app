@@ -1,5 +1,6 @@
 "use client";
 
+import { MessageCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { pounds, shortDate, whatsappNumber } from "@/lib/format";
 
@@ -39,8 +40,9 @@ export function ReminderButton({
       target="_blank"
       rel="noreferrer"
       onClick={logReminder}
-      className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#25d366] text-base font-semibold text-[#0b3d2a]"
+      className="press mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-control bg-[#25d366] text-base font-semibold text-[#0b3d2a]"
     >
+      <MessageCircle className="h-5 w-5" aria-hidden />
       Send WhatsApp reminder
     </a>
   );

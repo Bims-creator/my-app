@@ -82,9 +82,9 @@ export function ConfirmCard({
   };
 
   return (
-    <div className="self-stretch rounded-2xl border-2 border-brand bg-card p-4 shadow-sm">
-      <div className="mb-3 flex items-center justify-between">
-        <p className="font-semibold">Check this, then save</p>
+    <div className="self-stretch rounded-panel border border-brand/40 bg-card p-4 shadow-[0_10px_30px_-14px_rgba(11,60,42,0.45)]">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <p className="font-display text-lg font-semibold">Check this, then save</p>
         <Toggle
           options={[
             ["sale", "Sale"],
@@ -176,14 +176,14 @@ export function ConfirmCard({
       {!name && <p className="mt-3 text-sm text-muted-foreground">Add the customer&apos;s name to save.</p>}
       {name && !(amountPence > 0) && <p className="mt-3 text-sm text-muted-foreground">Add the amount to save.</p>}
 
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        <button onClick={onCancel} className="h-12 rounded-xl border font-medium">
+      <div className="mt-4 grid grid-cols-[1fr_2fr] gap-2">
+        <button onClick={onCancel} className="press h-12 rounded-control border border-input font-medium">
           Cancel
         </button>
         <button
           onClick={save}
           disabled={!canSave}
-          className="h-12 rounded-xl bg-brand font-semibold text-cream disabled:opacity-40"
+          className="press h-12 rounded-control bg-brand font-semibold text-cream disabled:opacity-40"
         >
           {saving ? "Saving…" : "Save"}
         </button>
@@ -194,14 +194,14 @@ export function ConfirmCard({
 
 function inputClass(missing: boolean) {
   return cn(
-    "h-11 w-full rounded-lg border bg-cream/50 px-3 text-base outline-none focus:ring-2 focus:ring-ring",
+    "h-12 w-full rounded-control border bg-background px-3 text-base tabular-nums outline-none focus-visible:outline-2 focus-visible:outline-ring",
     missing ? "border-owed/60" : "border-input",
   );
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <label className="grid gap-1 text-sm text-muted-foreground">
+    <label className="grid min-w-0 gap-1 text-sm font-medium text-muted-foreground">
       {label}
       {children}
     </label>
@@ -220,7 +220,7 @@ function Toggle({
   full?: boolean;
 }) {
   return (
-    <div role="radiogroup" className={cn("flex rounded-full bg-muted p-1", full && "w-full")}>
+    <div role="radiogroup" className={cn("flex rounded-control bg-muted p-1", full && "w-full")}>
       {options.map(([v, label]) => {
         const active = v === value;
         const owedStyle = v === "owes" && active;
@@ -232,8 +232,8 @@ function Toggle({
             aria-checked={active}
             onClick={() => onChange(v)}
             className={cn(
-              "rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
-              full && "flex-1 py-2.5 text-base",
+              "press min-h-11 rounded-[7px] px-4 text-sm font-semibold",
+              full && "flex-1 text-base",
               active ? (owedStyle ? "bg-owed text-white" : "bg-brand text-cream") : "text-muted-foreground",
             )}
           >

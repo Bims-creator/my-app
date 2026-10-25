@@ -50,6 +50,18 @@ export type CustomerBalance = {
   last_activity: string | null;
 };
 
+// The line under a name on the slate, without the amount: "2 × sourdough loaves · paid".
+export function entryDetail(e: Pick<Entry, "kind" | "item" | "quantity" | "paid" | "due_date">): string {
+  if (e.kind === "payment") return "Paid you";
+  const what = e.item ? `${e.quantity && e.quantity > 1 ? `${e.quantity} × ` : ""}${e.item}` : "Sale";
+  const status = e.paid ? "paid" : `owes you${e.due_date ? `, due ${shortDate(e.due_date)}` : ""}`;
+  return `${what} · ${status}`;
+}
+
+export function plural(n: number, one: string, many: string): string {
+  return `${n} ${n === 1 ? one : many}`;
+}
+
 export function describeEntry(e: Pick<Entry, "kind" | "item" | "quantity" | "amount_pence" | "paid" | "due_date">): string {
   if (e.kind === "payment") return `Paid you ${pounds(e.amount_pence)}`;
   const what = e.item ? `${e.quantity ? `${e.quantity} × ` : ""}${e.item} · ` : "";

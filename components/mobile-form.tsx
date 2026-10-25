@@ -12,9 +12,12 @@ export function MobileForm({ customerId, mobile }: { customerId: string; mobile:
 
   if (!editing) {
     return (
-      <p className="mt-4 text-sm text-muted-foreground">
-        {mobile ? `Mobile: ${mobile}` : "No mobile saved."}{" "}
-        <button onClick={() => setEditing(true)} className="text-brand underline underline-offset-4">
+      <p className="mt-3 flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
+        <span className="tabular-nums">{mobile ? `Mobile: ${mobile}` : "No mobile saved, so WhatsApp will ask who to send it to."}</span>
+        <button
+          onClick={() => setEditing(true)}
+          className="min-h-11 font-medium text-brand underline underline-offset-4"
+        >
           {mobile ? "Change" : "Add mobile"}
         </button>
       </p>
@@ -44,9 +47,9 @@ export function MobileForm({ customerId, mobile }: { customerId: string; mobile:
         onChange={(e) => setValue(e.target.value)}
         placeholder="07700 900123"
         aria-label="Customer's mobile"
-        className="h-11 flex-1 rounded-lg border border-input bg-cream/50 px-3 text-base outline-none focus:ring-2 focus:ring-ring"
+        className="h-12 min-w-0 flex-1 rounded-control border border-input bg-card px-3 text-base tabular-nums outline-none focus-visible:outline-2 focus-visible:outline-ring"
       />
-      <button disabled={saving} className="h-11 rounded-lg bg-brand px-4 font-medium text-cream">
+      <button disabled={saving} className="press h-12 min-w-24 rounded-control bg-brand px-5 font-semibold text-cream">
         {saving ? "Saving…" : "Save"}
       </button>
     </form>

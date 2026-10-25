@@ -13,18 +13,24 @@ const TABS = [
 export function BottomNav() {
   const pathname = usePathname();
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-10 mx-auto flex max-w-md border-t bg-card">
+    <nav
+      aria-label="Main"
+      className="fixed inset-x-0 bottom-0 z-20 mx-auto flex max-w-md border-t bg-card pb-[env(safe-area-inset-bottom)]"
+    >
       {TABS.map(({ href, label, icon: Icon }) => {
         const active = pathname.startsWith(href);
         return (
           <Link
             key={href}
             href={href}
+            aria-current={active ? "page" : undefined}
             className={cn(
-              "flex h-16 flex-1 flex-col items-center justify-center gap-1 text-sm",
+              "relative flex h-16 flex-1 flex-col items-center justify-center gap-1 text-sm",
               active ? "font-semibold text-brand" : "text-muted-foreground",
             )}
           >
+            {/* A bar above the active tab, so it isn't marked by colour alone. */}
+            {active && <span aria-hidden className="absolute inset-x-8 top-0 h-[3px] rounded-b-full bg-brand" />}
             <Icon className="h-5 w-5" aria-hidden />
             {label}
           </Link>
