@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Bricolage_Grotesque, Geist } from "next/font/google";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -15,13 +15,25 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0b6e4f",
+  viewportFit: "cover",
+  interactiveWidget: "resizes-content",
+  themeColor: "#f6f4ef",
+  colorScheme: "light",
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Body text: clear at small sizes.
+const body = Geist({
+  variable: "--font-body",
   display: "swap",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
+});
+
+// Display: sturdy, slightly hand-cut letters, like a painted shop sign.
+// Used for the wordmark, headings and the big money figures.
+const display = Bricolage_Grotesque({
+  variable: "--font-display",
+  display: "swap",
+  subsets: ["latin", "latin-ext", "vietnamese"],
 });
 
 export default function RootLayout({
@@ -30,8 +42,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB">
-      <body className={`${geistSans.className} antialiased`}>{children}</body>
+    <html lang="en-GB" className={`${body.variable} ${display.variable}`}>
+      <body className="antialiased">
+        <noscript>
+          <p className="p-4 text-center">Tally needs JavaScript turned on to work.</p>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

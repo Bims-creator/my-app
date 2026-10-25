@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Mic, Send, Square } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { parseMessage, type Draft } from "@/lib/parse";
-import { describeEntry, type CustomerBalance, type Entry } from "@/lib/format";
+import { entryDetail, pounds, type CustomerBalance, type Entry } from "@/lib/format";
 import { loadSampleData } from "@/lib/sample-data";
 import { ConfirmCard } from "@/components/confirm-card";
 import { cn } from "@/lib/utils";
@@ -128,7 +128,7 @@ export function Chat({ customers, todays }: { customers: CustomerBalance[]; toda
             <button
               onClick={trySample}
               disabled={loadingSample}
-              className="mt-2 block w-full rounded-lg border border-brand px-3 py-2 font-medium text-brand"
+              className="press mt-3 flex h-11 w-full items-center justify-center rounded-control border border-brand font-semibold text-brand disabled:opacity-60"
             >
               {loadingSample ? "Adding…" : "Fill with sample entries"}
             </button>
@@ -136,15 +136,24 @@ export function Chat({ customers, todays }: { customers: CustomerBalance[]; toda
         )}
 
         {todays.length > 0 && (
-          <p className="text-center text-xs uppercase tracking-wide text-muted-foreground">Today</p>
+          <p className="mt-1 text-center text-sm font-medium text-muted-foreground">Today</p>
         )}
         {todays.map((e) => {
           const name = customers.find((c) => c.id === e.customer_id)?.name ?? "Customer";
+          const owes = e.kind === "sale" && !e.paid;
           return (
-            <div key={e.id} className="flex flex-col gap-1">
+            <div key={e.id} className="flex flex-col gap-1.5">
               {e.source_text && <Bubble from="me">{e.source_text}</Bubble>}
-              <Bubble from="tally">
-                <span className="font-medium">{name}</span> · {describeEntry(e)}
+              <Bubble from="tally" wide>
+                {/* Long names take the whole line and push the amount underneath, rather than breaking mid-word. */}
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+                  <span className="min-w-0 break-words font-semibold">{name}</span>
+                  <span className={cn("ml-auto shrink-0 font-semibold tabular-nums", owes && "text-owed")}>
+                    {e.kind === "payment" ? "−" : ""}
+                    {pounds(e.amount_pence)}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground">{entryDetail(e)}</p>
               </Bubble>
             </div>
           );
@@ -173,7 +182,7 @@ export function Chat({ customers, todays }: { customers: CustomerBalance[]; toda
           e.preventDefault();
           makeDraft(text);
         }}
-        className="sticky bottom-16 flex items-end gap-2 border-t bg-cream px-3 py-3"
+        className="sticky bottom-[var(--nav-h)] z-10 flex items-end gap-2 bg-brand px-3 py-3"
       >
         <textarea
           rows={1}
@@ -187,15 +196,15 @@ export function Chat({ customers, todays }: { customers: CustomerBalance[]; toda
           }}
           placeholder={listening ? "Listening…" : "Type what you sold…"}
           aria-label="What did you sell?"
-          className="min-h-12 flex-1 resize-none rounded-3xl border border-input bg-card px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
+          className="max-h-32 min-h-14 flex-1 resize-none rounded-panel border-0 bg-card px-4 py-4 text-base leading-snug text-foreground outline-none placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
         />
         {text.trim() ? (
           <button
             type="submit"
             aria-label="Check it"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand text-cream"
+            className="press flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-cream text-brand focus-visible:outline-cream"
           >
-            <Send className="h-5 w-5" />
+            <Send className="h-5 w-5" aria-hidden />
           </button>
         ) : null}
         {voiceOk && (
@@ -204,11 +213,11 @@ export function Chat({ customers, todays }: { customers: CustomerBalance[]; toda
             onClick={toggleMic}
             aria-label={listening ? "Stop recording" : "Record a voice note"}
             className={cn(
-              "flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-cream shadow-md transition-colors",
-              listening ? "animate-pulse bg-owed" : "bg-brand",
+              "press flex h-16 w-16 shrink-0 items-center justify-center rounded-full focus-visible:outline-cream",
+              listening ? "bg-owed text-white motion-safe:animate-pulse" : "bg-cream text-brand",
             )}
           >
-            {listening ? <Square className="h-6 w-6" /> : <Mic className="h-7 w-7" />}
+            {listening ? <Square className="h-6 w-6" aria-hidden /> : <Mic className="h-7 w-7" aria-hidden />}
           </button>
         )}
       </form>
@@ -216,12 +225,23 @@ export function Chat({ customers, todays }: { customers: CustomerBalance[]; toda
   );
 }
 
-function Bubble({ from, strong, children }: { from: "me" | "tally"; strong?: boolean; children: React.ReactNode }) {
+function Bubble({
+  from,
+  strong,
+  wide,
+  children,
+}: {
+  from: "me" | "tally";
+  strong?: boolean;
+  wide?: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <div
       className={cn(
-        "max-w-[85%] rounded-2xl px-4 py-2.5 text-[15px] leading-snug shadow-sm",
-        from === "me" ? "self-end rounded-br-sm bg-[#dcefe6]" : "self-start rounded-bl-sm bg-card",
+        "max-w-[85%] break-words rounded-panel px-4 py-2.5 text-[15px] leading-normal",
+        from === "me" ? "self-end rounded-br-[4px] bg-accent" : "self-start rounded-bl-[4px] border bg-card",
+        wide && "w-[85%]",
         strong && "font-medium",
       )}
     >

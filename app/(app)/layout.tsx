@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { AppHeader } from "@/components/app-header";
 import { BottomNav } from "@/components/bottom-nav";
 import { BusinessNameForm } from "@/components/business-name-form";
-import { LogoutButton } from "@/components/logout-button";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -16,17 +16,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     .maybeSingle();
 
   return (
-    <div className="mx-auto flex min-h-svh w-full max-w-md flex-col">
-      <header className="sticky top-0 z-10 flex items-center justify-between bg-brand px-4 py-3 text-cream">
-        <div>
-          <p className="text-lg font-semibold leading-tight">Tally</p>
-          {profile && <p className="text-sm leading-tight opacity-80">{profile.business_name}</p>}
-        </div>
-        <LogoutButton />
-      </header>
+    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col">
+      <AppHeader businessName={profile?.business_name} />
       {profile ? (
         <>
-          <div className="flex flex-1 flex-col pb-16">{children}</div>
+          <div className="flex flex-1 flex-col pb-[var(--nav-h)]">{children}</div>
           <BottomNav />
         </>
       ) : (

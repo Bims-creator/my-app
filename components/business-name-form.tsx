@@ -28,8 +28,8 @@ export function BusinessNameForm() {
   };
 
   return (
-    <form onSubmit={save} className="m-4 rounded-2xl bg-card p-6 shadow-sm">
-      <h1 className="text-xl font-semibold">Welcome to Tally</h1>
+    <form onSubmit={save} className="px-4 py-8">
+      <h1 className="font-display text-3xl font-bold tracking-tight">Welcome to Tally</h1>
       <p className="mt-1 text-muted-foreground">
         What&apos;s your business called? It goes on the payment reminders you send.
       </p>

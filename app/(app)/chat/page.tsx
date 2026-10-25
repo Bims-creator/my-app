@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { Chat } from "@/components/chat";
-import { londonDate, pounds, type CustomerBalance, type Entry } from "@/lib/format";
+import { OwedSummary } from "@/components/owed-summary";
+import { londonDate, type CustomerBalance, type Entry } from "@/lib/format";
+import { slateTotals } from "@/lib/slate";
 
 export default async function ChatPage() {
   const supabase = await createClient();
@@ -14,22 +16,10 @@ export default async function ChatPage() {
   const customers = (balances ?? []) as CustomerBalance[];
   const today = londonDate();
   const todays = ((recent ?? []) as Entry[]).filter((e) => londonDate(new Date(e.created_at)) === today);
-  const owedPence = customers.reduce((sum, c) => sum + Math.max(0, c.balance_pence), 0);
-  const salesTodayPence = todays
-    .filter((e) => e.kind === "sale")
-    .reduce((sum, e) => sum + e.amount_pence, 0);
 
   return (
     <>
-      <div className="sticky top-[60px] z-10 flex justify-center gap-2 border-b bg-cream/95 px-4 py-2 text-sm backdrop-blur">
-        <span>
-          Owed to you <strong className="text-owed">{pounds(owedPence)}</strong>
-        </span>
-        <span aria-hidden className="text-muted-foreground">·</span>
-        <span>
-          Sales today <strong>{pounds(salesTodayPence)}</strong>
-        </span>
-      </div>
+      <OwedSummary {...slateTotals(customers, todays, today)} />
       <Chat customers={customers} todays={todays} />
     </>
   );

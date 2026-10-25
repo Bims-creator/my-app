@@ -13,7 +13,10 @@ export function LogoutButton() {
   };
 
   return (
-    <button onClick={logout} className="text-sm underline-offset-4 opacity-90 hover:underline">
+    <button
+      onClick={logout}
+      className="-mr-2 min-h-11 shrink-0 px-2 text-sm font-medium text-muted-foreground underline-offset-4 hover:underline"
+    >
       Sign out
     </button>
   );

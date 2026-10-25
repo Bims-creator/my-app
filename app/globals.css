@@ -2,29 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tally colours: deep green on warm off-white, coral only for money owed. */
+/* Tally: the slate behind the counter. Deep green on warm paper; coral only for money owed.
+   See DIRECTION.md for the reasons behind each value. */
 @layer base {
   :root {
     --background: 43 28% 95%;
     --foreground: 160 20% 12%;
-    --card: 0 0% 100%;
+    --card: 40 33% 99%;
     --card-foreground: 160 20% 12%;
-    --popover: 0 0% 100%;
+    --popover: 40 33% 99%;
     --popover-foreground: 160 20% 12%;
     --primary: 161 82% 24%;
     --primary-foreground: 43 28% 97%;
     --secondary: 43 20% 90%;
     --secondary-foreground: 160 20% 12%;
     --muted: 43 18% 90%;
-    --muted-foreground: 160 8% 38%;
-    --accent: 161 30% 90%;
+    --muted-foreground: 160 8% 34%;
+    --accent: 155 33% 89%;
     --accent-foreground: 161 82% 18%;
     --destructive: 15 71% 41%;
     --destructive-foreground: 0 0% 100%;
     --border: 43 14% 84%;
-    --input: 43 14% 78%;
+    --input: 43 12% 74%;
     --ring: 161 82% 24%;
-    --radius: 0.75rem;
+    --radius: 10px;
+
+    /* Height of the bottom tab bar, used to stack the counter bar above it. */
+    --nav-h: calc(4rem + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -32,7 +36,46 @@
   * {
     @apply border-border;
   }
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+  /* 16px stops iOS zooming into a field when it's focused. */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+  button,
+  a,
+  [role="button"],
+  [role="radio"],
+  label,
+  summary {
+    touch-action: manipulation;
+  }
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Press feedback the moment a finger lands. */
+  .press {
+    transition: transform 120ms ease-out, background-color 120ms ease-out, opacity 120ms ease-out;
+  }
+  .press:active {
+    transform: scale(0.97);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .press,
+    .press:active {
+      transition: none;
+      transform: none;
+    }
   }
 }

@@ -3,6 +3,8 @@ import animate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
+  // Hover styles only on devices that can hover, so taps don't leave them stuck on phones.
+  future: { hoverOnlyWhenSupported: true },
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -49,10 +51,17 @@ export default {
         cream: "#f6f4ef",
         owed: "#b4451f",
       },
+      fontFamily: {
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-body)", "system-ui", "sans-serif"],
+      },
+      // Radius family: controls 10px, floating panels and bubbles 16px.
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        control: "10px",
+        panel: "16px",
       },
     },
   },

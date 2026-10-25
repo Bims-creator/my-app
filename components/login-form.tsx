@@ -33,14 +33,14 @@ export function LoginForm() {
 
   if (sent) {
     return (
-      <div className="rounded-2xl bg-card p-6 shadow-sm">
-        <h2 className="text-xl font-semibold">Check your email</h2>
+      <div className="rounded-panel border bg-card p-5">
+        <h2 className="font-display text-xl font-semibold">Check your email</h2>
         <p className="mt-2 text-muted-foreground">
           We sent a sign-in link to <strong className="text-foreground">{email}</strong>. Open it on
           this phone and you&apos;re in.
         </p>
         <button
-          className="mt-4 text-sm text-primary underline underline-offset-4"
+          className="mt-2 min-h-11 text-sm font-medium text-primary underline underline-offset-4"
           onClick={() => setSent(false)}
         >
           Use a different email
@@ -50,12 +50,12 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleLogin} className="rounded-2xl bg-card p-6 shadow-sm">
-      <h2 className="text-xl font-semibold">Sign in</h2>
-      <p className="mt-1 text-muted-foreground">
-        Enter your email. We&apos;ll send you a link. No password needed.
+    <form onSubmit={handleLogin}>
+      <h2 className="font-semibold">Sign in or start</h2>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Enter your email and we&apos;ll send you a link. No password needed.
       </p>
-      <div className="mt-5 grid gap-2">
+      <div className="mt-4 grid gap-2">
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"
@@ -70,7 +70,7 @@ export function LoginForm() {
         />
       </div>
       {error && <p className="mt-3 text-sm text-owed">{error}</p>}
-      <Button type="submit" className="mt-5 h-12 w-full text-base" disabled={isLoading}>
+      <Button type="submit" className="mt-4 h-12 w-full text-base" disabled={isLoading}>
         {isLoading ? "Sending…" : "Send me a link"}
       </Button>
     </form>
