@@ -1,3 +1,4 @@
+import { FeedbackButton } from "@/components/feedback-button";
 import { LogoutButton } from "@/components/logout-button";
 
 export function AppHeader({ businessName }: { businessName?: string | null }) {
@@ -12,7 +13,10 @@ export function AppHeader({ businessName }: { businessName?: string | null }) {
             </p>
           )}
         </div>
-        <LogoutButton />
+        <div className="flex shrink-0 items-center">
+          <FeedbackButton />
+          <LogoutButton />
+        </div>
       </div>
     </header>
   );

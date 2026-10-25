@@ -170,11 +170,11 @@ export function Landing() {
             </h2>
             <ul className="mt-6 grid max-w-[44rem] gap-4 text-lg leading-relaxed">
               {[
-                "Only you can see your records. Each trader signs in with their own email, no password.",
+                "Only you can see your records. Each trader has their own account.",
                 "Nothing is saved until you tap Save.",
                 "Your phone’s speech service turns your voice into text. Tally keeps the words, never the recording.",
                 "Reminders go from your own WhatsApp. Tally never messages your customers.",
-                "We only ask for your email, your business name and your customers’ first names. Their phone numbers are optional.",
+                "We only ask for a way to sign you in, your business name and your customers’ first names. Their phone numbers are optional.",
               ].map((line) => (
                 <li key={line} className="flex gap-3">
                   <Check className="mt-1.5 h-5 w-5 shrink-0 text-brand" aria-hidden />
@@ -192,7 +192,7 @@ export function Landing() {
               Free while we test it
             </h2>
             <p className="mt-4 text-lg leading-relaxed">
-              Tally is free for our first traders. Sign in with your email, name your business, and record your first
+              Tally is free for our first traders. Sign in, name your business, and record your first
               sale. On your phone, add it to your home screen and it opens like an app. No app store, no card details.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">

@@ -36,7 +36,12 @@ export default function PrivacyPage() {
         <h2 className={h2}>What we collect</h2>
         <ul className="mt-3 grid list-disc gap-2 pl-6">
           <li className={li}>
-            <strong>Your email address</strong>, so we can send you a sign-in link.
+            <strong>Your email address</strong>, or your <strong>mobile number</strong> if you sign in by text, so we
+            can sign you in. If you sign in with Google, Google shares your name and email with us.
+          </li>
+          <li className={li}>
+            <strong>A password, only if you choose one.</strong> It&apos;s stored scrambled (hashed) by Supabase, so
+            nobody can read it, including us.
           </li>
           <li className={li}>
             <strong>Your business name</strong>, which goes on the reminders you send.
@@ -53,6 +58,9 @@ export default function PrivacyPage() {
             often reminders are used.
           </li>
           <li className={li}>
+            <strong>Feedback you send us</strong> with the Feedback button, and which screen you were on.
+          </li>
+          <li className={li}>
             <strong>Anonymous visit and speed stats</strong> from Vercel Analytics: which pages are opened and how fast
             they load. No cookies, and nothing that identifies you.
           </li>
@@ -64,7 +72,7 @@ export default function PrivacyPage() {
             <strong>Voice recordings.</strong> Your phone or browser&apos;s speech service (from Google or Apple) turns
             your voice into text. Tally only keeps the words.
           </li>
-          <li className={li}>Passwords, card details or bank details.</li>
+          <li className={li}>Card details or bank details.</li>
         </ul>
 
         <h2 className={h2}>Why</h2>
@@ -77,7 +85,7 @@ export default function PrivacyPage() {
         <h2 className={h2}>Who can see it</h2>
         <p className={p}>
           Only you. Each trader&apos;s records are locked to their own account. Your data is stored by Supabase in
-          London and the site runs on Vercel. Sign-in emails are sent through Gmail. Our small team can reach the
+          London and the site runs on Vercel. Sign-in emails are sent through Gmail, and sign-in texts through our SMS provider. Our small team can reach the
           database to fix problems, and we only look when we have to.
         </p>
         <p className={p}>
