@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT_EMAIL } from "@/lib/site";
+import { Logo } from "@/components/logo";
 
 export const metadata: Metadata = {
   title: "Privacy",
@@ -17,8 +18,8 @@ export default function PrivacyPage() {
   return (
     <div className="min-h-dvh">
       <header className="mx-auto flex h-16 max-w-3xl items-center justify-between px-5 pt-[env(safe-area-inset-top)]">
-        <Link href="/" className="inline-flex min-h-11 items-center font-display text-2xl font-bold tracking-tight text-brand">
-          Tally
+        <Link href="/" aria-label="Tally home" className="inline-flex min-h-11 items-center">
+          <Logo className="text-2xl" />
         </Link>
         <Link href="/auth/login" className="-mr-2 inline-flex min-h-11 items-center px-2 font-medium text-brand">
           Sign in

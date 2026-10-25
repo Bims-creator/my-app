@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Logo } from "@/components/logo";
 
 // Also how someone who has only ever used a code sets a password for the first time.
 export default function ForgotPasswordPage() {
@@ -29,8 +30,8 @@ export default function ForgotPasswordPage() {
   return (
     <main className="flex min-h-dvh w-full items-center justify-center px-5 py-10">
       <div className="w-full max-w-sm">
-        <Link href="/" className="inline-flex min-h-11 items-center font-display text-3xl font-bold tracking-tight text-brand">
-          Tally
+        <Link href="/" aria-label="Tally home" className="inline-flex min-h-11 items-center">
+          <Logo className="text-3xl" />
         </Link>
         <h1 className="mt-6 font-display text-2xl font-semibold">Set or reset your password</h1>
         {sent ? (

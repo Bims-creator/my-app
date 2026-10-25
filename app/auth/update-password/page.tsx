@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Logo } from "@/components/logo";
 
 // The password-reset email signs the trader in and lands here.
 export default function UpdatePasswordPage() {
@@ -37,7 +38,7 @@ export default function UpdatePasswordPage() {
   return (
     <main className="flex min-h-dvh w-full items-center justify-center px-5 py-10">
       <form onSubmit={save} className="w-full max-w-sm">
-        <p className="font-display text-3xl font-bold tracking-tight text-brand">Tally</p>
+        <Logo className="text-3xl" />
         <h1 className="mt-6 font-display text-2xl font-semibold">Choose a password</h1>
         <p className="mt-2 text-muted-foreground">At least 8 characters. You can still sign in with an email code any time.</p>
         <Label htmlFor="password" className="mt-5 block">

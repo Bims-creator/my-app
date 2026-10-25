@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { LoginForm } from "@/components/login-form";
+import { Logo } from "@/components/logo";
 
 // The first screen a new trader sees: what Tally does, shown working, then the one action.
 export default function Page() {
   return (
     <main className="flex min-h-dvh w-full flex-col items-center justify-center px-5 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-[max(2.5rem,env(safe-area-inset-top))]">
       <div className="w-full max-w-sm">
-        <h1 className="font-display text-5xl font-bold tracking-tight text-brand">Tally</h1>
+        <h1>
+          <Logo className="text-5xl" />
+        </h1>
         <p className="mt-2 font-display text-xl font-semibold leading-snug">
           Say what you sold. See who owes you.
         </p>

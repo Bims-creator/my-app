@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Check, Mic } from "lucide-react";
+import { TryIt } from "@/components/try-it";
+import { Logo } from "@/components/logo";
 
 // Public landing page for traders who aren't signed in yet.
 // Every example below is something Tally really does; no invented customers, numbers or quotes.
@@ -39,7 +41,7 @@ export function Landing() {
   return (
     <div className="min-h-dvh">
       <header className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 pt-[env(safe-area-inset-top)]">
-        <p className="font-display text-2xl font-bold tracking-tight text-brand">Tally</p>
+        <Logo className="text-2xl" />
         <Link href="/auth/login" className="-mr-2 inline-flex min-h-11 items-center px-2 font-medium text-brand">
           Sign in
         </Link>
@@ -47,7 +49,7 @@ export function Landing() {
 
       <main>
         {/* First screen: what it is, the one action, and Tally working. */}
-        <section className="mx-auto grid max-w-5xl gap-10 px-5 pb-12 pt-6 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:pb-20 lg:pt-12">
+        <section className="mx-auto grid max-w-5xl grid-cols-1 gap-10 px-5 pb-12 pt-6 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:pb-20 lg:pt-12">
           <div>
             <h1 className="font-display text-[clamp(2.5rem,9vw,4.25rem)] font-bold leading-[1.02] tracking-tight">
               Say what you sold. See who owes you.
@@ -62,23 +64,8 @@ export function Landing() {
             </p>
           </div>
 
-          {/* The slate: a deep green band with the real app view on it. */}
-          <figure className="-mx-5 bg-brand px-5 py-8 sm:mx-0 sm:rounded-panel sm:px-8">
-            <div className="mx-auto flex max-w-sm flex-col gap-2 rounded-panel bg-background p-4">
-              {/* The total includes Ada's £45 below, so the example adds up. */}
-              <p className="text-sm text-muted-foreground">5 people owe you</p>
-              <p className="font-display text-4xl font-bold leading-none tabular-nums text-owed">£151.00</p>
-              <hr className="my-2" />
-              <SaidBubble>Sold 3 cakes to Ada for £45, she&apos;ll pay Friday</SaidBubble>
-              <SlateLine name="Ada" amount="£45.00" detail="3 × cakes · owes you, due Friday" owes />
-              <p className="self-start rounded-panel rounded-bl-[4px] border bg-card px-4 py-2.5 text-[15px] font-medium">
-                Saved. Ada now owes you £45.00.
-              </p>
-            </div>
-            <figcaption className="mx-auto mt-4 max-w-sm text-sm text-cream/85">
-              What Tally shows after one voice note.
-            </figcaption>
-          </figure>
+          {/* The slate: a live demo on the deep green band, using the app's real message rules. */}
+          <TryIt />
         </section>
 
         {/* How it works: a real sequence, so the steps are numbered. */}
