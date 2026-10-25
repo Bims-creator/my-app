@@ -47,14 +47,22 @@ export async function updateSession(request: NextRequest) {
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
 
-  if (
-    request.nextUrl.pathname !== "/" &&
-    !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth") &&
+  const path = request.nextUrl.pathname;
+  // Pages and files anyone can open without signing in, including link-preview bots
+  // fetching the share image and icons.
+  const isPublic =
+    path === "/" ||
+    path === "/privacy" ||
+    path === "/manifest.webmanifest" ||
+    path.startsWith("/login") ||
+    path.startsWith("/auth") ||
+    path.startsWith("/icon") ||
+    path.startsWith("/apple-icon") ||
+    path.startsWith("/opengraph-image") ||
     // Design preview with sample data, development only (app/dev/preview).
-    !(process.env.NODE_ENV !== "production" && request.nextUrl.pathname.startsWith("/dev"))
-  ) {
+    (process.env.NODE_ENV !== "production" && path.startsWith("/dev"));
+
+  if (!user && !isPublic) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
     url.pathname = "/auth/login";
